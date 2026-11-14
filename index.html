@@ -18,7 +18,13 @@
         <p class="tagline">Watch sorting algorithms think, one line at a time.</p>
       </div>
     </div>
-    <a class="repo-link" href="https://github.com/mendus59/SortSight" target="_blank" rel="noopener">Source on GitHub</a>
+    <div class="header-links">
+      <nav class="mode-nav" aria-label="Modes">
+        <a href="index.html" aria-current="page">Code visualizer</a>
+        <a href="tutorial.html" id="tutorialNavLink">Whiteboard tutorials</a>
+      </nav>
+      <a class="repo-link" href="https://github.com/mendus59/SortSight" target="_blank" rel="noopener">Source on GitHub</a>
+    </div>
   </header>
 
   <nav class="algo-tabs" id="algoTabs" aria-label="Sorting algorithms"></nav>
@@ -82,6 +88,7 @@
     <section class="panel complexity-panel" aria-labelledby="cxTitle">
       <div class="panel-head"><h2 id="cxTitle">Complexity</h2></div>
       <p class="blurb" id="algoBlurb"></p>
+      <p class="lesson-link" id="lessonLink"><a href="tutorial.html" id="lessonLinkA">New to this? Watch the plain-English whiteboard lesson</a></p>
       <dl class="cx-grid">
         <div><dt>Best time</dt><dd id="cxBest"></dd></div>
         <div><dt>Average time</dt><dd id="cxAvg"></dd></div>

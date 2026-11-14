@@ -370,6 +370,11 @@ function selectAlgo(id) {
   $('cxStable').textContent = cx.stable === null ? '?' : cx.stable ? 'Yes' : 'No';
   $('algoBlurb').textContent = state.algo.blurb;
   $('worstDesc').textContent = state.algo.worstDescription;
+  const hasLesson = state.algo.id !== 'custom';
+  $('lessonLink').hidden = !hasLesson;
+  $('lessonLinkA').href = `tutorial.html#${state.algo.id}`;
+  $('lessonLinkA').textContent = `New to this? Watch the plain-English whiteboard lesson for ${state.algo.name}`;
+  $('tutorialNavLink').href = hasLesson ? `tutorial.html#${state.algo.id}` : 'tutorial.html';
   $('worstBtn').textContent = `Worst case for ${state.algo.id === 'custom' ? 'your sort' : state.algo.name}`;
   codeStatus(state.algo.id === 'custom'
     ? 'Write any sort(arr) you like and press Play. It runs in a sandboxed Web Worker.'

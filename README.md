@@ -17,6 +17,7 @@ SortSight is an interactive sorting-algorithm visualizer that runs entirely in t
 - **Play / Pause, Step and Reset**, with a speed slider from 1 step per second up to "Max".
 - **Worst-case data sets** for every algorithm (for example, sorted input for last-pivot Quick Sort). The panel explains why the set is a worst case and shows every value. You can also paste your own values.
 - **Fair comparisons**: a data set keeps its original order when you switch algorithms, so every sort starts from the same input. Finished runs go into a comparison table, and **Run every sort on this set** benchmarks all of them at once.
+- **Whiteboard tutorials** (`tutorial.html`): a plain-English, hand-drawn lesson for each sort, aimed at people who have never written code. Marker-sketched blocks hop and swap on a whiteboard while a handwritten caption explains every step. Play, pause, step, scrub, and choose a speed.
 - **Complexity panel** with best, average and worst time, space, and stability for each algorithm.
 
 ## How it works
@@ -57,6 +58,7 @@ npm test           # Node 20+; checks every algorithm and the instrumenter
 
 ```
 index.html            page shell
+tutorial.html         whiteboard tutorials (js/tutorial/: lessons.js scripts, board.js + sketch.js drawing, main.js player)
 css/style.css         styles
 js/main.js            UI, playback loop, comparison table
 js/algorithms.js      algorithm code, complexities, worst-case generators
