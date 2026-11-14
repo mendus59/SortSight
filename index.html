@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SortSight</title>
+  <meta name="description" content="SortSight: watch sorting algorithms run line by line, edit their code, and compare them on identical data sets.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='9' width='3' height='6' fill='%236c8cff'/%3E%3Crect x='6.5' y='5' width='3' height='10' fill='%236c8cff'/%3E%3Crect x='12' y='1' width='3' height='14' fill='%233ddc97'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="vendor/codemirror/codemirror.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="9" width="3" height="6"/><rect x="6.5" y="5" width="3" height="10"/><rect x="12" y="1" width="3" height="14" class="tall"/></svg>
+      <div>
+        <h1>SortSight</h1>
+        <p class="tagline">Watch sorting algorithms think, one line at a time.</p>
+      </div>
+    </div>
+    <a class="repo-link" href="https://github.com/mendus59/SortSight" target="_blank" rel="noopener">Source on GitHub</a>
+  </header>
+
+  <nav class="algo-tabs" id="algoTabs" aria-label="Sorting algorithms"></nav>
+
+  <main>
+    <section class="panel code-panel" aria-labelledby="codeTitle">
+      <div class="panel-head">
+        <h2 id="codeTitle"><span class="mono">sort()</span> <span class="algo-name" id="codeAlgoName"></span></h2>
+        <span class="badge" id="editedBadge" hidden>edited</span>
+        <button class="btn ghost small" id="resetCodeBtn" type="button" title="Restore the original code">Reset code</button>
+      </div>
+      <div class="editor-wrap"><textarea id="codeEditor" spellcheck="false"></textarea></div>
+      <p class="code-status" id="codeStatus" role="status">Edit the code and press Play to run your version. It runs in a sandboxed Web Worker.</p>
+    </section>
+
+    <section class="panel viz-panel" aria-labelledby="vizTitle">
+      <div class="panel-head">
+        <h2 id="vizTitle">Visualization</h2>
+        <span class="dataset-pill" id="datasetPill"></span>
+      </div>
+
+      <div class="controls">
+        <div class="segmented" role="radiogroup" aria-label="Number of items" id="sizeGroup">
+          <button type="button" role="radio" data-size="100" aria-checked="true">100</button>
+          <button type="button" role="radio" data-size="1000" aria-checked="false">1,000</button>
+          <button type="button" role="radio" data-size="10000" aria-checked="false">10,000</button>
+        </div>
+        <button class="btn" id="randomBtn" type="button">New random set</button>
+        <button class="btn" id="worstBtn" type="button">Worst case</button>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="bars" aria-label="Bar chart of the array being sorted" role="img"></canvas>
+      </div>
+
+      <div class="controls playback">
+        <button class="btn primary play" id="playBtn" type="button" aria-label="Play">
+          <svg viewBox="0 0 16 16" class="ico ico-play" aria-hidden="true"><path d="M4 2.5v11l9.5-5.5z"/></svg>
+          <svg viewBox="0 0 16 16" class="ico ico-pause" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>
+          <span id="playLabel">Play</span>
+        </button>
+        <button class="btn" id="stepBtn" type="button" title="Run one statement">Step</button>
+        <button class="btn" id="resetBtn" type="button" title="Restore the original order">Reset</button>
+        <label class="speed">
+          <span>Speed</span>
+          <input type="range" id="speed" min="0" max="100" value="55" aria-describedby="speedLabel">
+          <output id="speedLabel"></output>
+        </label>
+      </div>
+
+      <dl class="stats">
+        <div><dt>Steps</dt><dd id="statSteps">0</dd></div>
+        <div><dt>Reads</dt><dd id="statReads">0</dd></div>
+        <div><dt>Writes</dt><dd id="statWrites">0</dd></div>
+        <div><dt>Time</dt><dd id="statTime">0.0s</dd></div>
+        <div class="status-cell"><dt>Status</dt><dd id="statStatus">Ready</dd></div>
+      </dl>
+      <p class="legend"><span class="sw read"></span>read <span class="sw write"></span>write <span class="sw done"></span>sorted</p>
+    </section>
+
+    <section class="panel complexity-panel" aria-labelledby="cxTitle">
+      <div class="panel-head"><h2 id="cxTitle">Complexity</h2></div>
+      <p class="blurb" id="algoBlurb"></p>
+      <dl class="cx-grid">
+        <div><dt>Best time</dt><dd id="cxBest"></dd></div>
+        <div><dt>Average time</dt><dd id="cxAvg"></dd></div>
+        <div><dt>Worst time</dt><dd id="cxWorst"></dd></div>
+        <div><dt>Space</dt><dd id="cxSpace"></dd></div>
+        <div><dt>Stable</dt><dd id="cxStable"></dd></div>
+      </dl>
+      <h3>Worst-case input</h3>
+      <p class="blurb" id="worstDesc"></p>
+    </section>
+
+    <section class="panel dataset-panel" aria-labelledby="dsTitle">
+      <div class="panel-head">
+        <h2 id="dsTitle">Data set</h2>
+        <span class="muted" id="datasetMeta"></span>
+      </div>
+      <p class="blurb" id="datasetDesc"></p>
+      <textarea id="datasetValues" class="values" spellcheck="false" aria-label="Values in the current data set"></textarea>
+      <div class="controls">
+        <button class="btn" id="applyValuesBtn" type="button">Use these values</button>
+        <button class="btn ghost" id="copyValuesBtn" type="button">Copy</button>
+        <span class="muted" id="datasetMsg" role="status"></span>
+      </div>
+    </section>
+
+    <section class="panel results-panel" aria-labelledby="resTitle">
+      <div class="panel-head">
+        <h2 id="resTitle">Comparison</h2>
+        <div class="head-actions">
+          <button class="btn" id="compareAllBtn" type="button">Run every sort on this set</button>
+          <button class="btn ghost small" id="clearResultsBtn" type="button">Clear</button>
+        </div>
+      </div>
+      <p class="blurb">Every set keeps its original order, so each algorithm starts from exactly the same input. Finished runs land here.</p>
+      <div class="table-scroll">
+        <table class="results">
+          <thead><tr><th>Algorithm</th><th>Data set</th><th class="num">Items</th><th class="num">Steps</th><th class="num">Reads</th><th class="num">Writes</th><th class="num">Time</th><th>Result</th></tr></thead>
+          <tbody id="resultsBody"><tr class="empty"><td colspan="8">No runs yet. Press Play, or run every sort on this set.</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">Steps count each statement executed. Reads and writes count accesses to the array being sorted. Time is how long the animation ran at the chosen speed.</footer>
+
+  <script src="vendor/codemirror/codemirror.js"></script>
+  <script src="vendor/codemirror/javascript.js"></script>
+  <script src="vendor/codemirror/matchbrackets.js"></script>
+  <script src="vendor/codemirror/closebrackets.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
