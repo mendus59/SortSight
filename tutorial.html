@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SortSight Whiteboard</title>
+  <meta name="description" content="Plain-English, hand-drawn whiteboard lessons that show how eight sorting methods put things in order. No code needed.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='9' width='3' height='6' fill='%236c8cff'/%3E%3Crect x='6.5' y='5' width='3' height='10' fill='%236c8cff'/%3E%3Crect x='12' y='1' width='3' height='14' fill='%233ddc97'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/tutorial.css">
+</head>
+<body class="tutorial-page">
+  <header class="site-header">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="9" width="3" height="6"/><rect x="6.5" y="5" width="3" height="10"/><rect x="12" y="1" width="3" height="14" class="tall"/></svg>
+      <div>
+        <h1>SortSight</h1>
+        <p class="tagline">How sorting works, explained on a whiteboard. No code needed.</p>
+      </div>
+    </div>
+    <nav class="mode-nav" aria-label="Modes">
+      <a href="index.html">Code visualizer</a>
+      <a href="tutorial.html" aria-current="page">Whiteboard tutorials</a>
+    </nav>
+  </header>
+
+  <nav class="algo-tabs" id="lessonTabs" aria-label="Choose a sorting method"></nav>
+
+  <main class="tutorial-main">
+    <section class="whiteboard" aria-labelledby="lessonName">
+      <h2 class="sr-only" id="lessonName"></h2>
+      <div class="board-surface">
+        <canvas id="board" role="img" aria-label="Hand-drawn blocks being sorted. The caption below describes each step."></canvas>
+        <p class="caption" id="caption" aria-hidden="true"></p>
+        <p class="sr-only" id="captionLive" aria-live="polite"></p>
+        <span class="marker-tray" aria-hidden="true"><i></i><i></i><i></i></span>
+      </div>
+    </section>
+
+    <div class="tut-controls">
+      <button class="btn" id="restartBtn" type="button" title="Start this lesson again">Restart</button>
+      <button class="btn" id="backBtn" type="button" title="Previous step (left arrow)">Back</button>
+      <button class="btn primary play" id="playBtn" type="button" aria-label="Play">
+        <svg viewBox="0 0 16 16" class="ico ico-play" aria-hidden="true"><path d="M4 2.5v11l9.5-5.5z"/></svg>
+        <svg viewBox="0 0 16 16" class="ico ico-pause" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>
+        <span id="playLabel">Play</span>
+      </button>
+      <button class="btn" id="nextBtn" type="button" title="Next step (right arrow)">Next</button>
+      <label class="scrub">
+        <span class="sr-only">Jump to step</span>
+        <input type="range" id="scrub" min="0" max="0" value="0">
+        <output id="stepCount">1 / 1</output>
+      </label>
+      <div class="segmented" role="radiogroup" aria-label="Speed" id="speedGroup">
+        <button type="button" role="radio" data-speed="slow" aria-checked="false">Slow</button>
+        <button type="button" role="radio" data-speed="normal" aria-checked="true">Normal</button>
+        <button type="button" role="radio" data-speed="fast" aria-checked="false">Fast</button>
+      </div>
+    </div>
+
+    <p class="key" aria-label="Color key">
+      <span><i style="background:#e0701f"></i>orange: looking at it right now</span>
+      <span><i style="background:#7a44c2"></i>purple: the special one for this step</span>
+      <span><i style="background:#2a68d1"></i>blue / <i style="background:#d23f3a"></i>red: shorter / taller pile</span>
+      <span><i style="background:#23935a"></i>green: in its final spot</span>
+    </p>
+
+    <section class="nutshell" aria-label="In a nutshell">
+      <div><h3>The big idea</h3><p id="sumIdea"></p></div>
+      <div><h3>Good at</h3><p id="sumGood"></p></div>
+      <div><h3>Not so good at</h3><p id="sumBad"></p></div>
+    </section>
+
+    <p class="tut-foot">
+      Want to peek under the hood? <a id="codeLink" href="index.html">See the real code run</a> on hundreds of blocks in the code visualizer.
+      Tip: use the arrow keys to step, and the space bar to pause.
+    </p>
+  </main>
+
+  <script type="module" src="js/tutorial/main.js"></script>
+</body>
+</html>

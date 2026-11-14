@@ -49,6 +49,7 @@ h3 { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spa
   padding: 20px 24px 8px;
   max-width: 1480px;
   margin: 0 auto;
+  flex-wrap: wrap;
 }
 .brand { display: flex; align-items: center; gap: 12px; }
 .logo { width: 36px; height: 36px; fill: var(--accent); }
@@ -57,6 +58,19 @@ h3 { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spa
 .tagline { margin: 0; color: var(--muted); font-size: 13px; }
 .repo-link { color: var(--muted); font-size: 13px; text-decoration: none; border: 1px solid var(--line); padding: 6px 10px; border-radius: 8px; }
 .repo-link:hover { color: var(--text); border-color: var(--accent); }
+.header-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.mode-nav { display: flex; gap: 6px; flex-wrap: wrap; }
+.mode-nav a {
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+.mode-nav a:hover { color: var(--text); border-color: var(--accent); }
+.mode-nav a[aria-current='page'] { color: var(--text); border-color: var(--accent); background: var(--panel-2); }
+
 
 .algo-tabs {
   display: flex;
@@ -228,6 +242,8 @@ main {
 .cx-grid dt { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em; }
 .cx-grid dd { margin: 4px 0 0; font-family: var(--mono); font-size: 16px; font-weight: 600; }
 #worstDesc { margin-top: 6px; }
+.lesson-link { margin: 12px 0 0; font-size: 13.5px; }
+.lesson-link a { color: var(--accent-2); }
 
 /* dataset */
 .values {
