@@ -1,5 +1,19 @@
 # SortSight
 
+<!-- site-summary:start -->
+<!-- This section is this project's card on https://mendus59.github.io and is copied there daily.
+     Keep it true of what's on main: one plain-text summary line (max 160 characters), then 1-6 short bullets.
+     See CLAUDE.md ("Site summary"). -->
+Watch sorting algorithms run line by line, edit their code live, and compare them on the same data.
+
+- Eight built-in sorts (Bubble, Selection, Insertion, Cocktail Shaker, Shell, Merge, Quick, Heap) with the running line of code highlighted beside a live bar chart.
+- Edit any algorithm or write your own sort() and watch your version run, safely sandboxed in a Web Worker.
+- Worst-case data sets for every algorithm, plus your own values, replayed in the same order so the comparison table is a fair head-to-head.
+- Run every sort on one data set at once, and see each one's best, average and worst time, space and stability.
+- Whiteboard tutorials explain each sort in plain English, with hand-drawn blocks that hop and swap as you watch.
+- Scales to 10,000 bars, from 1 step per second up to full speed.
+<!-- site-summary:end -->
+
 **Watch sorting algorithms think, one line at a time.**
 
 SortSight is an interactive sorting-algorithm visualizer that runs entirely in the browser and is hosted on GitHub Pages.
