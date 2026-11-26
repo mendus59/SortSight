@@ -20,7 +20,8 @@ SortSight is an interactive sorting-algorithm visualizer that runs entirely in t
 
 **Live site:** https://mendus59.github.io/SortSight/
 
-![SortSight running Quick Sort on 1,000 items](docs/screenshot.png)
+<!-- site-screenshot: docs/screenshot.jpg -->
+![Screenshot of SortSight](docs/screenshot.jpg)
 
 ## Features
 
